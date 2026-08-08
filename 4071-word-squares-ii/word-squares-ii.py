@@ -1,7 +1,16 @@
 class Solution:
     def wordSquares(self, words: List[str]) -> List[List[str]]:
-        op=[]
-        for a, b, c, d in permutations(words,4):
-            if (a[0]==b[0] and a[3]==c[0] and d[0]==b[3] and d[3]==c[3]):
-                op.append([a, b, c, d])
-        return sorted(op)
+        ans=[]
+        for top in words:
+            for left in words:
+                if top==left or top[0]!=left[0]:
+                    continue
+                for right in words:
+                    if right==top or right==left or right[0]!=top[3]:
+                        continue
+                    for bottom in words:
+                        if bottom in (top,left,right):
+                            continue
+                        if bottom[0]==left[3] and bottom[3]==right[3]:
+                            ans.append([top,left,right,bottom])
+        return sorted(ans)
