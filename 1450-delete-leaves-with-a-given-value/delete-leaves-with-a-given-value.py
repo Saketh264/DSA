@@ -6,12 +6,9 @@
 #         self.right = right
 class Solution:
     def removeLeafNodes(self, root: TreeNode | None, target: int) -> TreeNode | None:
-        op=[]
-        def backtrack(node):
-            if not node: return None
-            node.left=backtrack(node.left)
-            node.right=backtrack(node.right)
-            if not node.left and not node.right and node.val==target: return None
-            return node
-        return backtrack(root)
+        if not root:return
+        root.left=self.removeLeafNodes(root.left,target)
+        root.right=self.removeLeafNodes(root.right,target)
+        if not root.left and not root.right and root.val==target:return None
+        return root
 
