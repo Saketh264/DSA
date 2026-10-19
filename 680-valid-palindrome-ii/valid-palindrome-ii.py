@@ -6,7 +6,7 @@ class Solution:
                 left+=1
                 right-=1
             else:
-                x=s[left+1:right+1]
-                y=s[left:right]
+                x=s[:left]+s[left+1:]
+                y=s[:right]+s[right+1:]
                 return x==x[::-1] or y==y[::-1]
         return True
